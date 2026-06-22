@@ -132,3 +132,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Automatically redirects @login_required views to the login page
 LOGIN_URL = 'login'
+
+# settings.py ke andar
+ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1', 'localhost']
