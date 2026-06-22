@@ -1,0 +1,100 @@
+{% extends 'properties/base.html' %}
+{% block title %}List Your Property | DigiEstate{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-9 col-lg-8">
+            <div class="card shadow border-0 p-4 rounded-4 bg-white">
+                <h3 class="fw-bold mb-2 text-center"><i class="bi bi-house-add-fill text-success me-2"></i>List Your Property</h3>
+                <p class="text-muted text-center mb-4">Fill out the form below to showcase your property to thousands of buyers.</p>
+                
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <h5 class="fw-bold mb-3 text-dark border-bottom pb-2"><i class="bi bi-info-circle me-1 text-success"></i> Basic Details</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-12">
+                            <label class="form-label fw-bold small">Property Title</label>
+                            {{ form.title }}
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small">Location</label>
+                            {{ form.location }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small">Purpose / Property Type</label>
+                            {{ form.property_type }}
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small">Price (INR)</label>
+                            {{ form.price }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small">Area (sqft)</label>
+                            {{ form.area_sqft }}
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small">Bedrooms</label>
+                            {{ form.bedrooms }}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small">Bathrooms</label>
+                            {{ form.bathrooms }}
+                        </div>
+                        
+                        <div class="col-12">
+                            <label class="form-label fw-bold small">Upload Main Property Image</label>
+                            {{ form.main_image }}
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label fw-bold small">Detailed Description</label>
+                            {{ form.description }}
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-1 text-dark"><i class="bi bi-images me-1 text-success"></i> Additional Gallery Images</h5>
+                    <p class="text-muted small mb-3">Upload up to 4 more high-resolution shots to enable the cinematic carousel player on the details page.</p>
+                    
+                    {{ formset.management_form }}
+                    
+                    <div class="row g-3 p-3 bg-light rounded-3 border mb-4">
+                        {% for img_form in formset %}
+                            <div class="col-md-6">
+                                <div class="card p-3 border-0 shadow-sm bg-white rounded-3 h-100">
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <span class="badge bg-success bg-opacity-10 text-success fw-bold">Slot #{{ forloop.counter }}</span>
+                                        {% if img_form.instance.pk %}
+                                            <div class="form-check m-0">
+                                                {{ img_form.DELETE }}
+                                                <label class="form-check-label text-danger small fw-bold" for="{{ img_form.DELETE.id_for_label }}">Delete</label>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <div class="mb-2">
+                                        <label class="small text-secondary fw-medium mb-1">Select File</label>
+                                        {{ img_form.image }}
+                                    </div>
+                                    <div>
+                                        <label class="small text-secondary fw-medium mb-1">Image Tag / Label</label>
+                                        {{ img_form.alt_text }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success w-100 fw-bold py-2.5 mt-2 shadow-sm rounded-3">
+                        <i class="bi bi-cloud-arrow-up-fill me-1"></i> Submit Property Listing
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

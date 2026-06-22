@@ -1,0 +1,80 @@
+{% extends 'properties/base.html' %}
+{% load static %}
+
+{% block title %}Establish Security Portal Account | DigiEstate{% endblock %}
+
+{% block content %}
+<div class="container auth-wrapper">
+    <div class="col-12 col-lg-10 auth-container shadow-lg">
+        <div class="row g-0">
+            
+            <div class="col-lg-5 auth-image-side d-none d-lg-flex flex-column justify-content-between p-5 text-white" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(16, 185, 129, 0.35)), url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1000&q=80') no-repeat center center/cover;">
+                <div>
+                    <h3 class="fw-extrabold tracking-tight mb-1" style="font-family: 'Plus Jakarta Sans'; font-size: 1.8rem;">DigiEstate</h3>
+                    <span class="badge bg-success rounded-pill px-3 py-1.5 fw-bold fs-8">Integrate Portfolio Account</span>
+                </div>
+                <div class="mb-4">
+                    <h2 class="fw-bold mb-2">Build your digital real estate catalog network.</h2>
+                    <p class="text-white-50 small mb-0">Join our SaaS engine framework to immediately manage inquiries, host rentals configuration files, and capture structured market inquiries.</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-7 auth-form-side bg-white">
+                <div class="mb-4">
+                    <h2 class="fw-bold text-dark mb-1" style="letter-spacing: -0.5px;">Initialize Workspace Setup</h2>
+                    <p class="text-muted small">Register your parameters down below to provision access to the live deployment database.</p>
+                </div>
+
+                <form method="POST" action="">
+                    {% csrf_token %}
+
+                    {% if form.errors %}
+                    <div class="alert alert-danger border-0 rounded-3 small p-3 mb-4">
+                        <i class="bi bi-patch-exclamation-fill me-2"></i> Form data parameters invalid. Please evaluate the structural fields input specifications.
+                    </div>
+                    {% endif %}
+
+                    {% for field in form %}
+                    <div class="auth-input-group">
+                        <input type="{{ field.field.widget.input_type }}" 
+                               name="{{ field.html_name }}" 
+                               id="{{ field.auto_id }}" 
+                               required 
+                               class="form-control auth-control" 
+                               placeholder="{{ field.label }}">
+                        
+                        {% if 'user' in field.name or 'name' in field.name %}
+                            <i class="bi bi-person-plus-fill"></i>
+                        {% elif 'email' in field.name %}
+                            <i class="bi bi-envelope-open-fill"></i>
+                        {% else %}
+                            <i class="bi bi-key-fill"></i>
+                        {% endif %}
+                        
+                        {% if field.help_text %}
+                        <div class="text-muted" style="font-size: 0.75rem; margin-top: 4px; padding-left: 10px;">{{ field.help_text|safe }}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+
+                    <div class="form-check mb-4">
+                        <input class="form-check-input text-success" type="checkbox" id="termsCheck" required checked>
+                        <label class="form-check-label text-secondary small fw-medium" for="termsCheck">
+                            I verify compliance with all corporate security <a href="#" class="text-success text-decoration-none fw-bold">Terms of Use Node</a> agreements.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-auth w-100 mb-4 d-flex align-items-center justify-content-center">
+                        Provision Account Access Key <i class="bi bi-person-check-fill ms-2"></i>
+                    </button>
+                    
+                    <div class="text-center">
+                        <p class="text-muted small mb-0">Already registered on the local database cluster? <a href="{% url 'login' %}" class="text-decoration-none text-success fw-bold">Authenticate Session Instead</a></p>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

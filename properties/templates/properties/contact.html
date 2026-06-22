@@ -1,0 +1,87 @@
+{% extends 'properties/base.html' %}
+{% block title %}Contact Us | DigiEstate{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm rounded-3 d-flex align-items-center justify-content-between p-3 mb-4" role="alert" style="background-color: #d1fae5; color: #065f46;">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-check-circle-fill me-2 fs-5 text-success"></i>
+                    <span class="fw-medium">{{ message }}</span>
+                </div>
+                <button type="button" class="btn-close m-0 shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="row g-5 justify-content-center">
+        <div class="col-lg-5">
+            <div class="bg-dark text-white p-4 p-md-5 rounded-4 h-100 d-flex flex-column justify-content-between shadow">
+                <div>
+                    <h3 class="fw-bold text-white mb-2">Connect With DigiEstate</h3>
+                    <p class="text-white-50 small mb-4">Have questions about listings or dashboard metrics? Drop us an inquiry frame.</p>
+                    
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="fs-4 text-success me-3"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div>
+                            <h6 class="mb-1 fw-bold">Our Headquarters</h6>
+                            <p class="small text-white-50 mb-0">Lalpur Main Rd, Ranchi, Jharkhand, 834001</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="fs-4 text-success me-3"><i class="bi bi-envelope-open-fill"></i></div>
+                        <div>
+                            <h6 class="mb-1 fw-bold">Support Electronic Mail</h6>
+                            <p class="small text-white-50 mb-0">support@digiestate.com</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-start">
+                        <div class="fs-4 text-success me-3"><i class="bi bi-telephone-fill"></i></div>
+                        <div>
+                            <h6 class="mb-1 fw-bold">Corporate Hotline</h6>
+                            <p class="small text-white-50 mb-0">+91 651 234 5678</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border-top border-secondary pt-4 mt-4">
+                    <p class="small text-white-50 mb-0">Developed with precision under Django and Bootstrap 5 Layouts.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm p-4 p-md-5 rounded-4 bg-white">
+                <h3 class="fw-bold text-dark mb-4">Send An Operational Message</h3>
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-secondary">Your Name</label>
+                        <input type="text" name="name" class="form-control bg-light border-0 py-2.5 shadow-none" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-secondary">Email Address</label>
+                        <input type="email" name="email" class="form-control bg-light border-0 py-2.5 shadow-none" placeholder="name@example.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-secondary">Subject</label>
+                        <input type="text" name="subject" class="form-control bg-light border-0 py-2.5 shadow-none" placeholder="e.g., Query about Broker Portal" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label small fw-bold text-secondary">Detailed Message</label>
+                        <textarea name="message" class="form-control bg-light border-0 shadow-none" rows="4" placeholder="Type your concerns here..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success w-100 fw-bold py-2.5 shadow-sm rounded-3">
+                        <i class="bi bi-send-fill me-2"></i>Dispatch Global Inquiry
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

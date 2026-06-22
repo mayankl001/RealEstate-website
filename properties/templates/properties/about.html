@@ -1,0 +1,38 @@
+{% extends 'properties/base.html' %}
+{% block title %}About Us | DigiEstate{% endblock %}
+
+{% block content %}
+<div class="bg-dark text-white text-center py-5 mb-5 shadow-sm" style="background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80') center/cover;">
+    <div class="container py-4">
+        <h1 class="display-4 fw-bold">About DigiEstate</h1>
+        <p class="lead text-white-50 max-w-2xl mx-auto">Redefining the real estate ecosystem with transparency, trust, and technology.</p>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+            <h2 class="fw-bold text-dark mb-3">Who We Are</h2>
+            <p class="text-muted" style="line-height: 1.8;">Welcome to <strong>DigiEstate</strong>, your premium destination for searching, buying, selling, and leasing properties seamlessly. We bridge the gap between properties owners, brokers, and customers through real-time lead analytics and comprehensive asset management pipelines.</p>
+            <p class="text-muted" style="line-height: 1.8;">Our vision is to bypass outdated property search mechanics and give buyers a secure environment equipped with interactive imagery and unified dashboards.</p>
+            <div class="row g-3 mt-2">
+                <div class="col-sm-6">
+                    <div class="p-3 bg-white rounded border-start border-4 border-success shadow-sm">
+                        <h5 class="fw-bold mb-1">100% Verified</h5>
+                        <p class="small text-muted mb-0">Legitimate agent entries.</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="p-3 bg-white rounded border-start border-4 border-success shadow-sm">
+                        <h5 class="fw-bold mb-1">Zero Hassle</h5>
+                        <p class="small text-muted mb-0">Direct client to agent communication.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80" alt="Office Collaboration" class="img-fluid rounded-4 shadow-lg">
+        </div>
+    </div>
+</div>
+{% endblock %}

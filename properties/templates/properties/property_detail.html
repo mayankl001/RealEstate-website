@@ -1,0 +1,183 @@
+{% extends 'properties/base.html' %}
+{% load static %}
+
+{% block title %}{{ property.title }} | DigiEstate{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm rounded-3 d-flex align-items-center justify-content-between p-3 mb-4" role="alert" style="background-color: #d1fae5; color: #065f46;">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-check-circle-fill me-2 fs-5 text-success"></i>
+                    <span class="fw-medium">{{ message }}</span>
+                </div>
+                <button type="button" class="btn-close m-0 shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-decoration-none fw-medium text-success">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'all_properties' %}" class="text-decoration-none fw-medium text-success">Properties</a></li>
+            <li class="breadcrumb-item active text-truncate" aria-current="page" style="max-width: 300px;">{{ property.title }}</li>
+        </ol>
+    </nav>
+
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm mb-4 overflow-hidden rounded-4">
+                
+                <div id="propertyCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                    {% if property.images.all %}
+                    <div class="carousel-indicators mb-3">
+                        <button type="button" data-bs-target="#propertyCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                        {% for img in property.images.all %}
+                            <button type="button" data-bs-target="#propertyCarousel" data-bs-slide-to="{{ forloop.counter }}"></button>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="carousel-inner" style="height: 460px;">
+                        <div class="carousel-item active h-100">
+                            {% if property.main_image %}
+                                <img src="{{ property.main_image.url }}" class="d-block w-100 h-100 object-fit-cover" alt="{{ property.title }}">
+                            {% else %}
+                                <img src="https://via.placeholder.com/800x450" class="d-block w-100 h-100 object-fit-cover" alt="No Image Available">
+                            {% endif %}
+                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-60 rounded-pill py-1 px-3 mx-auto" style="width: fit-content; bottom: 20px;">
+                                <p class="mb-0 small fw-bold text-white"><i class="bi bi-camera me-1"></i> Exterior Showcase Overview</p>
+                            </div>
+                        </div>
+
+                        {% for img in property.images.all %}
+                        <div class="carousel-item h-100">
+                            <img src="{{ img.image.url }}" class="d-block w-100 h-100 object-fit-cover" alt="{{ img.alt_text|default:property.title }}">
+                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-60 rounded-pill py-1 px-3 mx-auto" style="width: fit-content; bottom: 20px;">
+                                <p class="mb-0 small fw-bold text-white">
+                                    <i class="bi bi-images me-1"></i> {{ img.alt_text|default:"Interior Blueprint Room" }}
+                                </p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    {% if property.images.all %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon bg-dark bg-opacity-25 rounded-circle p-2" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon bg-dark bg-opacity-25 rounded-circle p-2" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                    {% endif %}
+                </div>
+                
+                <div class="card-body p-4">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                        <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 fs-6 border border-success border-opacity-25">For {{ property.get_property_type_display }}</span>
+                        <span class="badge bg-dark text-white fs-4 py-2 px-4 rounded-3" style="font-family: 'Plus Jakarta Sans';">₹{{ property.price }}</span>
+                    </div>
+                    <h1 class="fw-bold h2 mb-2" style="color: #0f172a; letter-spacing: -0.5px;">{{ property.title }}</h1>
+                    <p class="text-muted mb-0"><i class="bi bi-geo-alt-fill text-danger me-1"></i> {{ property.location }}</p>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm p-4 mb-4 rounded-4 bg-white">
+                <h4 class="fw-bold mb-4" style="color: #0f172a;"><i class="bi bi-grid-fill text-success me-2"></i>Property Specification Framework</h4>
+                <div class="row text-center g-3">
+                    <div class="col-4">
+                        <div class="py-3 px-2 h-100 d-flex flex-column align-items-center justify-content-center bg-light rounded-3 border border-light">
+                            <i class="bi bi-door-open-fill fs-3 mb-1 text-success"></i>
+                            <span class="fw-bold text-dark small">{{ property.bedrooms }} Bedrooms</span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="py-3 px-2 h-100 d-flex flex-column align-items-center justify-content-center bg-light rounded-3 border border-light">
+                            <i class="bi bi-water fs-3 mb-1 text-success"></i>
+                            <span class="fw-bold text-dark small">{{ property.bathrooms }} Bathrooms</span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="py-3 px-2 h-100 d-flex flex-column align-items-center justify-content-center bg-light rounded-3 border border-light">
+                            <i class="bi bi-bounding-box fs-3 mb-1 text-success"></i>
+                            <span class="fw-bold text-dark small">{{ property.area_sqft }} sqft Area</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm p-4 rounded-4 bg-white">
+                <h4 class="fw-bold mb-3" style="color: #0f172a;"><i class="bi bi-file-text-fill text-success me-2"></i>Structural Property Log</h4>
+                <p class="text-muted mb-0" style="line-height: 1.8; text-align: justify; font-size: 0.98rem;">
+                    {{ property.description }}
+                </p>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm p-4 sticky-top rounded-4 border-top border-4 border-success bg-white shadow-lg" style="top: 90px; z-index: 5;">
+                <h4 class="fw-bold mb-1 text-center text-dark" style="letter-spacing: -0.3px;">Contact Agent</h4>
+                <p class="text-muted text-center small mb-4">Leave your database parameters down below, and our platform engine will route notifications instantly.</p>
+                
+                <form method="POST" class="mb-3">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-secondary">Your Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-person"></i></span>
+                            <input type="text" name="name" class="form-control bg-light border-start-0 shadow-none text-dark fw-medium" placeholder="Enter full name" value="{% if user.is_authenticated %}{{ user.get_full_name|default:user.username }}{% endif %}" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-secondary">Email Address</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-envelope"></i></span>
+                            <input type="email" name="email" class="form-control bg-light border-start-0 shadow-none text-dark fw-medium" placeholder="name@example.com" value="{% if user.is_authenticated %}{{ user.email }}{% endif %}" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-secondary">Phone Number</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-telephone"></i></span>
+                            <input type="tel" name="phone" class="form-control bg-light border-start-0 shadow-none text-dark fw-medium" placeholder="+91 98765 XXXXX" required>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label small fw-bold text-secondary">Message Payload</label>
+                        <textarea name="message" class="form-control bg-light shadow-none text-dark" rows="3" placeholder="I am highly interested in this property and would like to schedule an asset audit..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-auth w-100 fw-bold py-2.5 mb-2 d-flex align-items-center justify-content-center">
+                        <i class="bi bi-send-fill me-2"></i> Dispatch Electronic Inquiry
+                    </button>
+                </form>
+
+                <div class="border-top pt-3 mt-2">
+                    <div class="text-center mb-2">
+                        <span class="text-muted small fw-bold">Or Connect Instantly via Telecom API</span>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <a href="https://wa.me/91XXXXXXXXXX?text=Hi,%20I%20am%20interested%20in%20your%20listing:%20{{ property.title|urlencode }}%20located%20at%20{{ property.location|urlencode }}.%20Please%20share%20availability%20details." 
+                               target="_blank" 
+                               class="btn btn-sm btn-outline-success w-100 py-2 fw-bold d-flex align-items-center justify-content-center rounded-3">
+                                <i class="bi bi-whatsapp me-1.5 fs-6"></i> WhatsApp
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a href="tel:+91XXXXXXXXXX" 
+                               class="btn btn-sm btn-outline-dark w-100 py-2 fw-bold d-flex align-items-center justify-content-center rounded-3">
+                                <i class="bi bi-telephone-outbound me-1.5 small"></i> Direct Call
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,220 @@
+{% extends 'properties/base.html' %}
+{% load static %}
+
+{% block title %}My Portal Dashboard | DigiEstate{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    
+    <div class="p-4 p-md-5 mb-4 rounded-4 text-white position-relative overflow-hidden shadow-lg" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
+        <div class="position-absolute bottom-0 end-0 opacity-10 translate-middle-y me-3 d-none d-lg-block" style="pointer-events: none; z-index: 1;">
+            <i class="bi bi-building" style="font-size: 9rem;"></i>
+        </div>
+        
+        <div class="row align-items-center position-relative" style="z-index: 5;">
+            <div class="col-md-7 col-lg-8">
+                <span class="badge bg-success mb-2 px-3 py-2 rounded-pill text-uppercase tracking-wider small fw-bold">Live Workspace</span>
+                <h1 class="display-5 fw-bold mb-2">Hello, {{ user.username }}!</h1>
+                <p class="lead text-white-50 mb-0">Monitor your rental listings, incoming customer inquiries, and shortcut metrics from one spot.</p>
+            </div>
+            
+            <div class="col-md-5 col-lg-4 text-md-end mt-4 mt-md-0">
+                <a href="{% url 'add_property' %}" class="btn btn-success btn-lg fw-bold px-4 py-3 shadow rounded-3 border-0 transition-smooth d-inline-flex align-items-center" style="background-color: #059669;">
+                    <i class="bi bi-plus-circle-fill me-2 fs-5"></i>Add New Property
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <ul class="nav nav-pills gap-2 bg-white p-2 rounded-3 shadow-sm mb-4 border border-light" id="dashboardTabs" role="tablist" style="width: fit-content;">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active fw-bold px-3 py-2 d-flex align-items-center text-wrap" id="properties-tab" data-bs-toggle="tab" data-bs-target="#properties-content" type="button" role="tab" aria-controls="properties-content" aria-selected="true">
+                <i class="bi bi-house-heart me-2"></i> 
+                <span>My Properties</span>
+                <span class="badge ms-2 rounded-pill border">{{ my_properties.count }}</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link fw-bold px-3 py-2 d-flex align-items-center text-wrap" id="leads-tab" data-bs-toggle="tab" data-bs-target="#leads-content" type="button" role="tab" aria-controls="leads-content" aria-selected="false">
+                <i class="bi bi-chat-right-quote me-2"></i> 
+                <span>Received Leads</span>
+                <span class="badge ms-2 rounded-pill border">{{ received_leads.count }}</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link fw-bold px-3 py-2 d-flex align-items-center text-wrap" id="wishlist-tab" data-bs-toggle="tab" data-bs-target="#wishlist-content" type="button" role="tab" aria-controls="wishlist-content" aria-selected="false">
+                <i class="bi bi-bookmark-heart me-2"></i> 
+                <span>Favorites</span>
+                <span class="badge ms-2 rounded-pill border">{{ my_wishlist.count }}</span>
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content pt-2" id="dashboardTabsContent">
+        
+        <div class="tab-pane fade show active" id="properties-content" role="tabpanel" aria-labelledby="properties-tab">
+            <div class="row g-4">
+                {% for property in my_properties %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card dashboard-card h-100 overflow-hidden">
+                        <div class="position-relative" style="height: 220px;">
+                            <span class="badge badge-soft-success position-absolute top-0 start-0 m-3 z-3 px-3 py-2 rounded-pill fs-7 shadow-sm">
+                                For {{ property.get_property_type_display }}
+                            </span>
+                            {% if property.main_image %}
+                                <img src="{{ property.main_image.url }}" class="w-100 h-100" style="object-fit: cover;">
+                            {% else %}
+                                <img src="https://via.placeholder.com/400x250" class="w-100 h-100" style="object-fit: cover;">
+                            {% endif %}
+                        </div>
+                        <div class="card-body p-4">
+                            <h3 class="fw-bold fs-4 text-success mb-2">₹{{ property.price }}</h3>
+                            <h5 class="fw-bold text-truncate mb-2" style="color: #0f172a;">{{ property.title }}</h5>
+                            <p class="text-muted small mb-3 text-truncate"><i class="bi bi-geo-alt-fill text-danger me-1"></i>{{ property.location }}</p>
+                            
+                            <div class="row g-2 text-center mb-1">
+                                <div class="col-4">
+                                    <div class="feature-box-interactive">
+                                        <i class="bi bi-door-open mb-1 d-block small"></i>
+                                        <span class="x-small fw-bold text-secondary d-block">{{ property.bedrooms }} Beds</span>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="feature-box-interactive">
+                                        <i class="bi bi-water mb-1 d-block small"></i>
+                                        <span class="x-small fw-bold text-secondary d-block">{{ property.bathrooms }} Baths</span>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="feature-box-interactive">
+                                        <i class="bi bi-bounding-box mb-1 d-block small"></i>
+                                        <span class="x-small fw-bold text-secondary d-block">{{ property.area_sqft }} sqft</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-light border-0 d-flex gap-2 p-3">
+                            <a href="{% url 'property_detail' property.id %}" class="btn btn-sm btn-outline-dark fw-bold rounded-3 flex-grow-1 py-2">
+                                <i class="bi bi-eye me-1"></i> View Live
+                            </a>
+                            <button class="btn btn-sm btn-outline-danger rounded-3 px-3 py-2" data-bs-toggle="modal" data-bs-target="#deleteModal{{ property.id }}">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="deleteModal{{ property.id }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content premium-modal shadow-lg p-3">
+                            <div class="modal-body text-center p-4">
+                                <div class="bg-danger bg-opacity-10 p-3 rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                                    <i class="bi bi-trash3-fill text-danger fs-2"></i>
+                                </div>
+                                <h4 class="fw-bold text-dark">Remove Listing?</h4>
+                                <p class="text-muted mb-0">Are you sure you want to permanently delete <strong>"{{ property.title }}"</strong>? This action will remove all related leads data from the system.</p>
+                                <form action="{% url 'delete_property' property.id %}" method="POST" class="d-flex justify-content-center gap-3 mt-4">
+                                    {% csrf_token %}
+                                    <button type="button" class="btn btn-light px-4 py-2.5 fw-bold rounded-3" data-bs-dismiss="modal">Keep Property</button>
+                                    <button type="submit" class="btn btn-danger px-4 py-2.5 fw-bold rounded-3">Confirm Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12 text-center py-5 bg-white rounded-4 shadow-sm border border-dashed">
+                    <i class="bi bi-building-dash text-muted display-3 d-block mb-3"></i>
+                    <h5 class="fw-bold text-dark">No Active Properties Found</h5>
+                    <p class="text-muted small">You haven't added any listings to your portfolio account yet.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="leads-content" role="tabpanel" aria-labelledby="leads-tab">
+            <div class="card dashboard-card overflow-hidden">
+                <div class="table-responsive">
+                    <table class="table premium-table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th class="p-3 fs-7">Property Reference</th>
+                                <th class="p-3 fs-7">Client Detail</th>
+                                <th class="p-3 fs-7">Contact Credentials</th>
+                                <th class="p-3 fs-7">Client Query Statement</th>
+                                <th class="p-3 fs-7">Timestamp</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for lead in received_leads %}
+                            <tr>
+                                <td class="p-3">
+                                    <a href="{% url 'property_detail' lead.property.id %}" class="fw-bold text-decoration-none text-success d-block text-truncate" style="max-width: 180px;">
+                                        {{ lead.property.title }}
+                                    </a>
+                                    <span class="badge badge-soft-primary fs-8 mt-1">₹{{ lead.property.price }}</span>
+                                </td>
+                                <td class="p-3 fw-bold text-dark"><i class="bi bi-person me-1 text-muted"></i>{{ lead.name }}</td>
+                                <td class="p-3">
+                                    <div class="small fw-semibold text-dark"><i class="bi bi-envelope-at me-2 text-muted"></i>{{ lead.email }}</div>
+                                    <div class="small text-muted mt-1"><i class="bi bi-phone me-2 text-muted"></i>{{ lead.phone }}</div>
+                                </td>
+                                <td class="p-3">
+                                    <div class="text-muted small bg-light p-3 rounded-3" style="max-width: 280px; min-width: 200px; line-height: 1.5; border-left: 3px solid #059669;">
+                                        {{ lead.message }}
+                                    </div>
+                                </td>
+                                <td class="p-3 text-muted small fw-medium">{{ lead.created_at|date:"M d, Y" }}<br><span class="text-black-50 fs-8">{{ lead.created_at|date:"h:i A" }}</span></td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5" class="text-center py-5 text-muted">
+                                    <i class="bi bi-envelope-paper text-muted display-4 d-block mb-3"></i>
+                                    <h5 class="fw-bold text-dark">No Leads Inbox Active</h5>
+                                    <p class="text-muted small mb-0">Whenever clients interact with your properties, communications show up here.</p>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="wishlist-content" role="tabpanel" aria-labelledby="wishlist-tab">
+            <div class="row g-4">
+                {% for item in my_wishlist %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card dashboard-card h-100 overflow-hidden">
+                        <div class="position-relative" style="height: 200px;">
+                            <span class="badge bg-dark position-absolute top-0 start-0 m-3 z-3 rounded-pill">For {{ item.property.get_property_type_display }}</span>
+                            <div class="position-absolute top-0 end-0 m-3 z-3">
+                                <a href="{% url 'toggle_wishlist' item.property.id %}" class="btn btn-light rounded-circle shadow-sm p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;"><i class="bi bi-heart-fill text-danger"></i></a>
+                            </div>
+                            {% if item.property.main_image %}
+                                <img src="{{ item.property.main_image.url }}" class="w-100 h-100" style="object-fit: cover;">
+                            {% endif %}
+                        </div>
+                        <div class="card-body p-4">
+                            <h4 class="fw-bold text-success mb-2">₹{{ item.property.price }}</h4>
+                            <h5 class="fw-bold text-truncate" style="color: #0f172a;">{{ item.property.title }}</h5>
+                            <p class="text-muted small mb-0"><i class="bi bi-geo-alt me-1"></i>{{ item.property.location }}</p>
+                        </div>
+                        <div class="card-footer bg-white border-0 pb-3 pt-0 px-4">
+                            <a href="{% url 'property_detail' item.property.id %}" class="btn btn-dark w-100 fw-bold rounded-3 py-2">Inspect Listing</a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12 text-center py-5 bg-white rounded-4 shadow-sm border border-dashed">
+                    <i class="bi bi-heartbreak text-muted display-3 d-block mb-3"></i>
+                    <h5 class="fw-bold text-dark">Your Wishlist is Empty</h5>
+                    <p class="text-muted small mb-0">Bookmark architectural projects across listings pages to monitor progress details.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
