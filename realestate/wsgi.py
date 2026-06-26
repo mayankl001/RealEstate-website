@@ -1,16 +1,13 @@
 import os
-import sys
 from django.core.wsgi import get_wsgi_application
+from whitenoise import WhiteNoise
 
-# 📁 Isse project root directory system path me force-inject ho jayegi
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if BASE_DIR not in sys.path:
-    sys.path.append(BASE_DIR)
-
-# 🚀 Strict deployment settings link
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'realestate.settings')
 
 application = get_wsgi_application()
 
-# 🚨 Vercel standard handler linkage
-app = application
+# WhiteNoise ko manually WSGI application ke upar wrap karein
+# Isse Vercel bina kisi build script ke aapki CSS serve karne lagega
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+application = WhiteNoise(application, root=os.path.join(base_dir, 'staticfiles'))
+application.add_files(os.path.join(base_dir, 'static'), prefix='static/')
