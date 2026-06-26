@@ -1,0 +1,482 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --primary-color: #0f172a;    /* Deep Slate/Navy */
+    --accent-color: #10b981;     /* Emerald Green */
+    --bg-light: #f8fafc;         /* Soft Off-White */
+    --text-dark: #334155;        /* Charcoal Text */
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    --hover-shadow: 0 20px 40px rgba(16, 185, 129, 0.1);
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-light) !important;
+    color: var(--text-dark);
+}
+
+/* --- Premium Navbar Style --- */
+.navbar {
+    background-color: var(--primary-color) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 15px 0;
+}
+.navbar-brand {
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+}
+.nav-link {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75) !important;
+    transition: all 0.3s ease;
+}
+.nav-link:hover, .nav-link.active {
+    color: var(--accent-color) !important;
+}
+
+/* --- Beautiful Cinematic Hero Section --- */
+.hero-section {
+    background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.95)), 
+                url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+    padding: 120px 0;
+    border-radius: 0 0 40px 40px;
+    box-shadow: 0 15px 30px rgba(15, 23, 42, 0.1);
+}
+.hero-section h1 {
+    font-size: 3rem;
+    letter-spacing: -1px;
+}
+
+/* Glassmorphism Search Bar */
+.search-card {
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    border-radius: 20px !important;
+    padding: 24px !important;
+}
+.search-card .form-control, .search-card .form-select {
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+.search-card .form-control:focus, .search-card .form-select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+.btn-search {
+    background-color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+    color: white !important;
+    border-radius: 12px !important;
+    padding: 12px !important;
+    transition: all 0.3s ease !important;
+}
+.btn-search:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+
+/* --- Modern & Sleek Property Cards --- */
+.property-card {
+    border: none !important;
+    border-radius: 24px !important;
+    background: #ffffff;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.property-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--hover-shadow);
+}
+.property-card .card-img-top {
+    transition: transform 0.6s ease;
+}
+.property-card:hover .card-img-top {
+    transform: scale(1.06);
+}
+
+/* Floating Badges */
+.badge-type {
+    background: rgba(15, 23, 42, 0.8) !important;
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 8px 14px !important;
+    font-weight: 600;
+}
+.badge-price {
+    background-color: rgba(16, 185, 129, 0.1) !important;
+    color: var(--accent-color) !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    padding: 6px 14px !important;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.property-card .card-title {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+/* Card Features Footer */
+.feature-icon-box {
+    background-color: #f1f5f9;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-weight: 500;
+    color: #475569;
+}
+.feature-icon-box i {
+    color: var(--accent-color);
+}
+
+/* Smooth Buttons */
+.btn-details {
+    border: 2px solid var(--primary-color) !important;
+    color: var(--primary-color) !important;
+    font-weight: 600 !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+}
+.btn-details:hover {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+/* --- Clean Modern Footer --- */
+footer {
+    background-color: var(--primary-color) !important;
+    border-top: 4px solid var(--accent-color);
+    border-radius: 40px 40px 0 0;
+}
+/* --- Premium Real Estate Dashboard Accent & UI Variables --- */
+:root {
+    --primary-SaaS: #0f172a;   /* Slate 900 */
+    --accent-SaaS: #059669;    /* Emerald Green */
+    --bg-light-SaaS: #f8fafc;  /* Soft grey bg */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dashboard Cards Enhancements */
+.dashboard-card {
+    border: none !important;
+    border-radius: 16px !important;
+    background: #ffffff;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Custom Nav Pills for Dashboard Tabs */
+.custom-nav-pills {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+.custom-nav-pills .nav-item {
+    display: block !important;
+}
+
+.custom-nav-pills .nav-link {
+    color: #334155 !important; /* Rich Dark Slate Text - Hamesha dikhega */
+    background: transparent !important;
+    border-radius: 10px !important;
+    transition: all 0.2s ease-in-out;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    opacity: 1 !important; /* Visibility locked to 100% */
+    visibility: visible !important;
+}
+
+/* Active Tab Configuration */
+.custom-nav-pills .nav-link.active {
+    background-color: #059669 !important; /* Emerald Green */
+    color: #ffffff !important; /* Active text turns bold white */
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25) !important;
+}
+
+/* Icon colors reset */
+.custom-nav-pills .nav-link i {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.custom-nav-pills .nav-link.active i {
+    color: #ffffff !important;
+}
+
+/* CRM Table Premium Design */
+.premium-table thead {
+    background-color: #f1f5f9 !important;
+}
+
+.premium-table th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: #475569;
+}
+
+.premium-table tbody tr {
+    transition: var(--transition-smooth);
+}
+
+.premium-table tbody tr:hover {
+    background-color: #f8fafc !important;
+}
+
+/* Feature Icon Grid Inside Cards */
+.feature-box-interactive {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 12px;
+    transition: var(--transition-smooth);
+    border: 1px solid #e2e8f0;
+}
+
+.feature-box-interactive i {
+    color: var(--accent-SaaS);
+}
+
+/* Custom Soft Badges */
+.badge-soft-success {
+    background-color: #d1fae5 !important;
+    color: #065f46 !important;
+    font-weight: 600;
+}
+
+.badge-soft-primary {
+    background-color: #e0f2fe !important;
+    color: #0369a1 !important;
+    font-weight: 600;
+}
+
+/* Glassmorphism Confirmation Modal */
+.premium-modal {
+    border-radius: 24px !important;
+    border: none !important;
+}
+
+/* ==========================================================================
+   🎮 FIXED DIGITAL ESTATE DASHBOARD TABS (FORCE VISIBILITY SYSTEM)
+   ========================================================================== */
+
+/* Target specific layout container explicitly to block bootstrap inline styles */
+#dashboardTabs.nav-pills {
+    background-color: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    padding: 6px !important;
+    display: inline-flex !important;
+    flex-wrap: nowrap !important; /* Forces items to stay in one clean row */
+}
+
+/* Base state override for all buttons inside our dashboard tracker */
+#dashboardTabs .nav-item .nav-link {
+    color: #334155 !important;       /* Solid charcoal text - Always visible */
+    background-color: #f8fafc !important; /* Clean soft light gray backdrop */
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;       /* Punchy bold structure */
+    font-size: 0.95rem !important;
+    opacity: 1 !important;             /* Kill any active/inactive transparency animations */
+    visibility: visible !important;    /* Force rendering layer */
+    display: inline-flex !important;
+    align-items: center !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+/* Ensure the custom text span nodes inside buttons are fully opaque */
+#dashboardTabs .nav-link span {
+    color: #334155 !important;
+    display: inline-block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Force standard green icon tone for inactive tabs */
+#dashboardTabs .nav-link i {
+    color: #059669 !important;
+    opacity: 1 !important;
+    font-size: 1.1rem !important;
+}
+
+/* Active State Trigger Layer (Overrides standard bootstrap royal blue color) */
+#dashboardTabs .nav-item .nav-link.active {
+    background-color: #059669 !important; /* Beautiful corporate emerald green */
+    color: #ffffff !important;             /* Crisp white text for the active node */
+    border-color: #059669 !important;
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25) !important;
+}
+
+/* Active State Text nodes and Icon nodes color inversion toggle */
+#dashboardTabs .nav-link.active span {
+    color: #ffffff !important;
+}
+
+#dashboardTabs .nav-link.active i {
+    color: #ffffff !important;
+}
+
+/* Smooth Interactive Hover Effects for inactive nodes */
+#dashboardTabs .nav-link:hover:not(.active) {
+    background-color: #e2e8f0 !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+}
+
+/* ==========================================================================
+   🏁 FIXED TABS BADGE SYSTEM (AUTOMATIC INVERSION)
+   ========================================================================== */
+#dashboardTabs .nav-link .badge {
+    background-color: #f1f5f9 !important;
+    color: #475569 !important;
+    font-weight: 700 !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+/* Jab tab active hoga toh badge automatic inverted clean white color ka ho jayega */
+#dashboardTabs .nav-link.active .badge {
+    background-color: #ffffff !important;
+    color: #059669 !important;
+    border-color: #ffffff !important;
+}
+
+/* ==========================================================================
+   🔐 PREMIUM AUTHENTICATION PAGES (LOGIN & SIGNUP)
+   ========================================================================== */
+.auth-wrapper {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.auth-container {
+    background: #ffffff;
+    border-radius: 30px !important;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+/* Glassmorphic internal panel for fields */
+.auth-form-side {
+    padding: 50px;
+}
+
+.auth-image-side {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(5, 150, 105, 0.4)), 
+                url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1000&q=80') no-repeat center center/cover;
+    position: relative;
+}
+
+/* Floating labels effect or modern custom inputs */
+.auth-input-group {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.auth-input-group i {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 1.1rem;
+    transition: var(--transition-smooth);
+    z-index: 10;
+}
+
+.auth-control {
+    width: 100%;
+    padding: 14px 16px 14px 48px !important;
+    border-radius: 14px !important;
+    border: 1px solid #e2e8f0 !important;
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.auth-control:focus {
+    background-color: #ffffff !important;
+    border-color: #10b981 !important; /* Emerald active color */
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1) !important;
+    outline: none;
+}
+
+/* Accent shift for icon on active state */
+.auth-input-group .auth-control:focus + i {
+    color: #10b981;
+}
+
+.btn-auth {
+    background-color: #059669 !important;
+    border: none !important;
+    color: #ffffff !important;
+    padding: 14px !important;
+    border-radius: 14px !important;
+    font-weight: 700 !important;
+    font-size: 1rem;
+    letter-spacing: -0.3px;
+    transition: var(--transition-smooth) !important;
+}
+
+.btn-auth:hover {
+    background-color: #047857 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(5, 150, 105, 0.2) !important;
+}
+
+/* Social buttons placeholder style if needed */
+.btn-social-auth {
+    border: 1px solid #e2e8f0 !important;
+    background: #ffffff !important;
+    color: #334155 !important;
+    padding: 12px !important;
+    border-radius: 12px !important;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+.btn-social-auth:hover {
+    background: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+}
+
+/* ⚡ Premium Dropdown Visual Engine Overrides */
+.custom-premium-dropdown {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent !important;
+    appearance: none; /* Default heavy arrow system removal */
+}
+
+/* Jab user filter select block par interact ya click karega */
+.custom-premium-dropdown:focus {
+    background-color: #ffffff !important;
+    border-color: #198754 !important; /* Premium Branding Success Green */
+    box-shadow: 0 0 0 4px rgba(25, 135, 84, 0.15) !important; /* Soft Glow Aura */
+    color: #0f172a !important;
+}
+
+/* Hover State effect feedback */
+.custom-premium-dropdown:hover {
+    background-color: #f1f5f9 !important;
+}

@@ -3,15 +3,16 @@
   "builds": [
     {
       "src": "realestate/wsgi.py",
-      "use": "@vercel/python",
-      "config": {
-        "runtime": "python3.9"
-      }
+      "use": "@vercel/python"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "(.*)",
       "dest": "realestate/wsgi.py"
     }
   ]
