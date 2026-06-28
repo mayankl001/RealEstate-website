@@ -87,11 +87,4 @@ class PropertyImage(models.Model):
 
     def __str__(self):
         return f"Image for {self.property.title}"
-    
-class PropertyImage(models.Model):
-    property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='property_gallery/')
-    alt_text = models.CharField(max_length=200, blank=True, null=True, help_text="Optional: Image description")
-
-    def __str__(self):
-        return f"Image for {self.property.title}"    
+      

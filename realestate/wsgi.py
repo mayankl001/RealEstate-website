@@ -10,4 +10,4 @@ application = get_wsgi_application()
 # Isse Vercel bina kisi build script ke aapki CSS serve karne lagega
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 application = WhiteNoise(application, root=os.path.join(base_dir, 'staticfiles'))
-application.add_files(os.path.join(base_dir, 'static'), prefix='static/')
+application.add_files(os.path.join(base_dir, 'static'), prefix='')
