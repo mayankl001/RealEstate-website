@@ -165,8 +165,12 @@ body {
 
 /* --- Hero Search Filter Section --- */
 .hero-banner {
-  /* Dark Slate/Blue Gradient with High Contrast */
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  /* Dark overlay + Static background image setup */
+  background: linear-gradient(
+      rgba(15, 23, 42, 0.78), 
+      rgba(30, 41, 59, 0.88)
+    ),
+    url("../images/home-1.webp") no-repeat center center / cover;
   padding: 80px 0 60px 0;
   color: #ffffff;
   position: relative;
