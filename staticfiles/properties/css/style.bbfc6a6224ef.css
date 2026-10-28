@@ -1,0 +1,257 @@
+/* ==========================================================================
+   DigiEstate - Core Custom Styling & Theme Definitions
+   ========================================================================== */
+
+/* --- Root Variables & Theme Palette --- */
+:root {
+  --de-primary: #0f172a;       /* Deep Slate Blue */
+  --de-secondary: #1e293b;     /* Slate */
+  --de-accent: #10b981;        /* Modern Emerald Green */
+  --de-accent-hover: #059669;  /* Darker Emerald */
+  --de-gold: #f59e0b;          /* Premium / Featured Badge */
+  --de-light-bg: #f8fafc;      /* Clean Soft Background */
+  --de-card-border: #e2e8f0;   /* Light Card Border */
+  --de-text-dark: #334155;     /* High Contrast Text */
+  --de-text-muted: #64748b;    /* Subtitle Text */
+  
+  --de-radius-sm: 8px;
+  --de-radius-md: 12px;
+  --de-radius-lg: 20px;
+  
+  --de-shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+  --de-shadow-md: 0 8px 20px rgba(15, 23, 42, 0.08);
+  --de-shadow-lg: 0 16px 32px rgba(15, 23, 42, 0.12);
+  --de-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Global Typography & Base Body --- */
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  color: var(--de-text-dark);
+  background-color: var(--de-light-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--de-accent);
+}
+
+/* --- Header & Navbar Customizations --- */
+.navbar-custom {
+  background-color: var(--de-primary);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #cbd5e1;
+  font-weight: 500;
+  transition: var(--de-transition);
+  padding: 0.5rem 0.85rem;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+  color: var(--de-accent) !important;
+}
+
+/* --- Property Cards & Grid Enhancements --- */
+.property-card {
+  border: 1px solid var(--de-card-border);
+  border-radius: var(--de-radius-md);
+  background: #ffffff;
+  overflow: hidden;
+  transition: var(--de-transition);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.property-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--de-shadow-lg);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+/* Image Container & Overlay Badges */
+.property-card .img-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 220px;
+  background-color: #e2e8f0;
+}
+
+.property-card .img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.property-card:hover .img-wrapper img {
+  transform: scale(1.06);
+}
+
+.property-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 20px;
+  z-index: 2;
+  letter-spacing: 0.5px;
+}
+
+.badge-sale {
+  background-color: var(--de-accent);
+  color: #ffffff;
+}
+
+.badge-rent {
+  background-color: #0284c7;
+  color: #ffffff;
+}
+
+.badge-featured {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: var(--de-gold);
+  color: #ffffff;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 20px;
+  z-index: 2;
+}
+
+/* Price Overlay Tag */
+.price-tag {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--de-accent);
+}
+
+/* Icon Metrics Bar (Beds, Baths, Sqft) */
+.property-features {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.85rem;
+  color: var(--de-text-muted);
+}
+
+.property-features i {
+  color: var(--de-accent);
+  margin-right: 4px;
+}
+
+/* --- Hero Search Filter Section --- */
+.hero-banner {
+  /* Dark Slate/Blue Gradient with High Contrast */
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  padding: 80px 0 60px 0;
+  color: #ffffff;
+  position: relative;
+}
+
+/* Ensure Text Readability inside Hero */
+.hero-banner h1 {
+  color: #ffffff !important;
+  font-weight: 800;
+}
+
+.hero-banner p.lead {
+  color: #cbd5e1 !important; /* Soft Slate Gray */
+  font-weight: 400;
+}
+
+.search-filter-box {
+  background: #ffffff;
+  border-radius: var(--de-radius-md);
+  padding: 24px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.search-filter-box {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: var(--de-radius-lg);
+  padding: 24px;
+  box-shadow: var(--de-shadow-lg);
+  backdrop-filter: blur(8px);
+}
+
+.search-filter-box label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--de-text-muted);
+  margin-bottom: 6px;
+}
+
+/* --- Form Controls Customization --- */
+.form-control, .form-select {
+  border-radius: var(--de-radius-sm);
+  border: 1px solid #cbd5e1;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.95rem;
+  transition: var(--de-transition);
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--de-accent);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+/* --- Buttons Enhancement --- */
+.btn-success {
+  background-color: var(--de-accent);
+  border-color: var(--de-accent);
+  transition: var(--de-transition);
+}
+
+.btn-success:hover, .btn-success:focus {
+  background-color: var(--de-accent-hover);
+  border-color: var(--de-accent-hover);
+  transform: translateY(-1px);
+}
+
+/* --- Footer Link Animation --- */
+.transition-link {
+  transition: var(--de-transition);
+}
+.transition-link:hover {
+  color: var(--de-accent) !important;
+  padding-left: 6px;
+}
+
+/* --- Responsive Helpers --- */
+@media (max-width: 768px) {
+  .hero-banner {
+    padding: 50px 0;
+  }
+  .search-filter-box {
+    padding: 16px;
+  }
+  .property-card .img-wrapper {
+    height: 180px;
+  }
+}

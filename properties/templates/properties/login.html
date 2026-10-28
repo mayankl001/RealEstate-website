@@ -3,23 +3,103 @@
 
 {% block title %}Sign In to Your Workspace | DigiEstate{% endblock %}
 
+{% block extra_css %}
+<style>
+    /* Authentication Split Layout Custom Styling */
+    .auth-wrapper {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 0;
+    }
+    .auth-container {
+        border-radius: 20px;
+        overflow: hidden;
+        background: #ffffff;
+    }
+    .auth-image-side {
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(30, 41, 59, 0.92) 100%), 
+                    url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+        min-height: 500px;
+    }
+    .auth-form-side {
+        padding: 3rem 2.5rem;
+    }
+    .auth-input-group {
+        position: relative;
+        margin-bottom: 1.25rem;
+    }
+    .auth-input-group i {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #94a3b8;
+        font-size: 1.1rem;
+    }
+    .auth-control {
+        border-radius: 10px;
+        padding: 0.75rem 2.5rem 0.75rem 1rem;
+        border: 1px solid #cbd5e1;
+        font-size: 0.95rem;
+        transition: all 0.25s ease-in-out;
+    }
+    .auth-control:focus {
+        border-color: #10b981;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+        outline: none;
+    }
+    .btn-auth {
+        background-color: #10b981;
+        color: #ffffff;
+        font-weight: 700;
+        border-radius: 10px;
+        padding: 0.75rem;
+        border: none;
+        transition: all 0.25s ease-in-out;
+    }
+    .btn-auth:hover {
+        background-color: #059669;
+        color: #ffffff;
+        transform: translateY(-1px);
+    }
+    @media (max-width: 768px) {
+        .auth-form-side {
+            padding: 2rem 1.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="container auth-wrapper">
     <div class="col-12 col-lg-10 auth-container shadow-lg">
         <div class="row g-0">
             
+            <!-- Left Branding Image Side -->
             <div class="col-lg-5 auth-image-side d-none d-lg-flex flex-column justify-content-between p-5 text-white">
                 <div>
-                    <h3 class="fw-extrabold tracking-tight mb-1" style="font-family: 'Plus Jakarta Sans'; font-size: 1.8rem;">DigiEstate</h3>
-                    <span class="badge bg-white text-dark rounded-pill px-3 py-1.5 fw-bold fs-8">v2.4 Smart Portal</span>
+                    <a href="{% url 'home' %}" class="text-white text-decoration-none">
+                        <h3 class="fw-bold tracking-tight mb-1" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.8rem;">
+                            Digi<span class="text-success">Estate</span>
+                        </h3>
+                    </a>
+                    <span class="badge bg-white text-dark rounded-pill px-3 py-1.5 fw-bold fs-8 mt-2">v2.4 Smart Portal</span>
                 </div>
+                
                 <div class="mb-4">
-                    <h2 class="fw-bold mb-2">Find your next architecture benchmark.</h2>
-                    <p class="text-white-50 small mb-0">Access thousands of localized property insights, metrics trackers, and customer communication pipelines seamlessly.</p>
+                    <h2 class="fw-bold mb-2">Find your next architectural benchmark.</h2>
+                    <p class="text-white-50 small mb-0">Access thousands of localized property insights, metrics trackers, and direct customer communication pipelines seamlessly.</p>
+                </div>
+                
+                <div class="border-top border-white border-opacity-10 pt-3">
+                    <p class="small text-white-50 mb-0"><i class="bi bi-shield-check text-success me-1"></i> RERA Approved Verified Network</p>
                 </div>
             </div>
 
-            <div class="col-12 col-lg-7 auth-form-side bg-white">
+            <!-- Right Form Side -->
+            <div class="col-12 col-lg-7 auth-form-side bg-white d-flex flex-column justify-content-center">
                 <div class="mb-4">
                     <h2 class="fw-bold text-dark mb-1" style="letter-spacing: -0.5px;">Welcome Back!</h2>
                     <p class="text-muted small">Enter your credentials to manage your listings and real-time CRM dashboard.</p>
@@ -28,36 +108,45 @@
                 <form method="POST" action="">
                     {% csrf_token %}
 
+                    <!-- Validation Errors -->
                     {% if form.errors %}
-                    <div class="alert alert-danger border-0 rounded-3 small p-3 mb-4" role="alert">
-                        <i class="bi bi-exclamation-triangle-fill me-2"></i> Username or password incorrect. Please try again.
-                    </div>
+                        <div class="alert alert-danger border-0 rounded-3 small p-3 mb-4 d-flex align-items-center" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill fs-5 me-2"></i>
+                            <span>Username or password incorrect. Please try again.</span>
+                        </div>
                     {% endif %}
 
+                    <!-- Username Field -->
                     <div class="auth-input-group">
-                        <input type="text" name="username" autofocus maxlength="150" required id="id_username" class="form-control auth-control" placeholder="Username / Email Reference">
-                        <i class="bi bi-person-bounding-box"></i>
+                        <input type="text" name="username" autofocus maxlength="150" required id="id_username" class="form-control auth-control" placeholder="Username or Email Address">
+                        <i class="bi bi-person"></i>
                     </div>
 
+                    <!-- Password Field -->
                     <div class="auth-input-group">
-                        <input type="password" name="password" required id="id_password" class="form-control auth-control" placeholder="Secure Password Access key">
+                        <input type="password" name="password" required id="id_password" class="form-control auth-control" placeholder="Enter Password">
                         <i class="bi bi-shield-lock-fill"></i>
                     </div>
 
+                    <!-- Options Bar -->
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div class="form-check">
-                            <input class="form-check-input text-success" type="checkbox" id="rememberMe">
-                            <label class="form-check-label text-secondary small fw-medium" for="rememberMe">Remember machine context</label>
+                            <input class="form-check-input" type="checkbox" id="rememberMe">
+                            <label class="form-check-label text-secondary small fw-medium" for="rememberMe">Remember me</label>
                         </div>
-                        <a href="#" class="text-decoration-none small text-success fw-bold">Forgot Access Key?</a>
+                        <a href="#" class="text-decoration-none small text-success fw-bold">Forgot Password?</a>
                     </div>
 
+                    <!-- Submit Button -->
                     <button type="submit" class="btn btn-auth w-100 mb-4 d-flex align-items-center justify-content-center">
                         Secure Sign In <i class="bi bi-arrow-right-short ms-1 fs-5"></i>
                     </button>
                     
+                    <!-- Signup Redirect Link -->
                     <div class="text-center">
-                        <p class="text-muted small mb-0">Don't have a verified account infrastructure yet? <a href="{% url 'signup' %}" class="text-decoration-none text-success fw-bold">Initialize Signup Setup</a></p>
+                        <p class="text-muted small mb-0">Don't have an account yet? 
+                            <a href="{% url 'signup' %}" class="text-decoration-none text-success fw-bold ms-1">Create an Account</a>
+                        </p>
                     </div>
                 </form>
             </div>

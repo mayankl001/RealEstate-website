@@ -1,42 +1,141 @@
 {% extends 'properties/base.html' %}
-{% block title %}Our Services | DigiEstate{% endblock %}
+{% load static %}
+
+{% block title %}Our Services | DigiEstate Real Estate Solutions{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Custom Styling for Services Cards */
+    .service-card {
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .service-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 32px rgba(15, 23, 42, 0.1) !important;
+        border-color: rgba(16, 185, 129, 0.3) !important;
+    }
+    .service-icon-box {
+        width: 56px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="container my-5 py-3">
-    <div class="text-center mb-5">
-        <span class="badge bg-success bg-opacity-10 text-success fw-bold px-3 py-2 rounded-pill mb-2">What We Offer</span>
-        <h1 class="fw-bold text-dark display-5">Premium Real Estate Provisions</h1>
-        <p class="text-muted mx-auto" style="max-width: 600px;">Explore a suite of premium software modules designed to accelerate conversions and organize property directories.</p>
+<!-- Header Banner -->
+<section class="py-5 text-white position-relative overflow-hidden" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
+    <div class="container py-3">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <span class="badge bg-success bg-opacity-25 text-success border border-success border-opacity-25 fw-semibold px-3 py-2 rounded-pill mb-3 text-uppercase fs-7 shadow-sm">
+                    <i class="bi bi-stars me-1"></i> What We Offer
+                </span>
+                <h1 class="display-4 fw-bold mb-2">Our Premium Services</h1>
+                <p class="text-white-50 mb-0 fs-5 fw-normal">Discover a suite of modern real estate solutions designed to simplify property discovery, lead management, and verified asset acquisition.</p>
+            </div>
+            <div class="col-md-4 text-md-end mt-4 mt-md-0">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-md-end mb-0 small">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-success text-decoration-none">Home</a></li>
+                        <li class="breadcrumb-item active text-white-50" aria-current="page">Services</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
     </div>
+</section>
 
+<!-- Main Services Section -->
+<div class="container my-5 py-3">
+    
+    <!-- Services Grid -->
     <div class="row g-4">
-        <div class="col-md-4">
-            <div class="card border-0 shadow-sm p-4 rounded-4 h-100 transition-hover bg-white">
-                <div class="p-3 bg-success bg-opacity-10 rounded-3 text-success mb-4" style="width: fit-content;">
+        <!-- Service 1: Property Listings -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm p-4 rounded-4 h-100 service-card bg-white">
+                <div class="service-icon-box bg-success bg-opacity-10 rounded-3 text-success mb-4">
                     <i class="bi bi-house-heart-fill fs-3"></i>
                 </div>
-                <h4 class="fw-bold text-dark mb-2">Property Listings System</h4>
-                <p class="text-muted small mb-0">Whether it's a premium 3 BHK flat in Lalpur or a rental office setup, showcase your architectural assets with high-resolution multi-image carousels effortlessly.</p>
+                <h4 class="fw-bold text-dark mb-2">Verified Property Listings</h4>
+                <p class="text-muted small mb-0" style="line-height: 1.7;">Showcase your residential plots, luxury flats, or commercial spaces with multi-image gallery support, exact sqft dimensions, and direct location maps.</p>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card border-0 shadow-sm p-4 rounded-4 h-100 transition-hover bg-white">
-                <div class="p-3 bg-primary bg-opacity-10 rounded-3 text-primary mb-4" style="width: fit-content;">
+
+        <!-- Service 2: Lead CRM -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm p-4 rounded-4 h-100 service-card bg-white">
+                <div class="service-icon-box bg-primary bg-opacity-10 rounded-3 text-primary mb-4">
                     <i class="bi bi-graph-up-arrow fs-3"></i>
                 </div>
-                <h4 class="fw-bold text-dark mb-2">CRM Lead Pipeline</h4>
-                <p class="text-muted small mb-0">Track customer interactions instantly. Owners get a dedicated leads dashboard with integrated single-tap WhatsApp and Call API communication endpoints.</p>
+                <h4 class="fw-bold text-dark mb-2">Real-Time Lead CRM</h4>
+                <p class="text-muted small mb-0" style="line-height: 1.7;">Manage incoming buyer inquiries from your personal dashboard. Respond instantly with built-in single-click WhatsApp and Call integrations.</p>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card border-0 shadow-sm p-4 rounded-4 h-100 transition-hover bg-white">
-                <div class="p-3 bg-warning bg-opacity-10 rounded-3 text-warning mb-4" style="width: fit-content;">
-                    <i class="bi bi-shield-lock-fill fs-3"></i>
+
+        <!-- Service 3: Wishlist System -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm p-4 rounded-4 h-100 service-card bg-white">
+                <div class="service-icon-box bg-warning bg-opacity-10 rounded-3 text-warning mb-4">
+                    <i class="bi bi-bookmark-heart-fill fs-3"></i>
                 </div>
                 <h4 class="fw-bold text-dark mb-2">Personalized Wishlists</h4>
-                <p class="text-muted small mb-0">Sign up and curate your favorite household spots securely. Keep a close look on fluctuating pricing structures directly inside your customer portal.</p>
+                <p class="text-muted small mb-0" style="line-height: 1.7;">Save your favorite homes, apartments, and plots in a dedicated account portal to track pricing and compare options before making a decision.</p>
+            </div>
+        </div>
+
+        <!-- Service 4: RERA Compliance -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm p-4 rounded-4 h-100 service-card bg-white">
+                <div class="service-icon-box bg-info bg-opacity-10 rounded-3 text-info mb-4">
+                    <i class="bi bi-shield-check fs-3"></i>
+                </div>
+                <h4 class="fw-bold text-dark mb-2">RERA Document Check</h4>
+                <p class="text-muted small mb-0" style="line-height: 1.7;">All listed commercial and residential projects are mapped with RERA compliance status to ensure legal transparency and buyer safety.</p>
+            </div>
+        </div>
+
+        <!-- Service 5: Zero Commission -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm p-4 rounded-4 h-100 service-card bg-white">
+                <div class="service-icon-box bg-danger bg-opacity-10 rounded-3 text-danger mb-4">
+                    <i class="bi bi-percent fs-3"></i>
+                </div>
+                <h4 class="fw-bold text-dark mb-2">Zero Commission Deals</h4>
+                <p class="text-muted small mb-0" style="line-height: 1.7;">Eliminate unnecessary middleman charges. Buyers and tenants connect directly with property owners and authorized developers.</p>
+            </div>
+        </div>
+
+        <!-- Service 6: Local Advisory -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm p-4 rounded-4 h-100 service-card bg-white">
+                <div class="service-icon-box bg-dark bg-opacity-10 rounded-3 text-dark mb-4">
+                    <i class="bi bi-geo-alt-fill fs-3"></i>
+                </div>
+                <h4 class="fw-bold text-dark mb-2">Local Market Insights</h4>
+                <p class="text-muted small mb-0" style="line-height: 1.7;">Get localized property evaluations and land registration guidance across Ranchi, Lalpur, Kanke Road, Bariatu, and Namkum localities.</p>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Call to Action Banner -->
+<section class="py-5 text-white" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
+    <div class="container py-2">
+        <div class="row align-items-center">
+            <div class="col-lg-8 text-center text-lg-start mb-3 mb-lg-0">
+                <h3 class="fw-bold mb-2">Have a Property to Rent or Sell?</h3>
+                <p class="text-white-50 mb-0 fs-5">List your property on DigiEstate for free and get inquiries directly on your dashboard and phone.</p>
+            </div>
+            <div class="col-lg-4 text-center text-lg-end">
+                <a href="{% if user.is_authenticated %}{% url 'add_property' %}{% else %}{% url 'login' %}{% endif %}" class="btn btn-success btn-lg fw-bold px-4 rounded-pill shadow">
+                    <i class="bi bi-plus-circle me-1"></i> Post Free Property
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

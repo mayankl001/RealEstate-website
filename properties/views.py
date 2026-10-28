@@ -126,30 +126,31 @@ def logout_view(request):
 # ==========================================================================
 # 🏗️ 5. PROPERTY MANAGEMENT WORKSPACE (Add / Delete)
 # ==========================================================================
-@login_required(login_url='login')
+@login_required
 def add_property_view(request):
     if request.method == 'POST':
         form = PropertyForm(request.POST, request.FILES)
         formset = PropertyImageFormSet(request.POST, request.FILES)
-        
+
         if form.is_valid() and formset.is_valid():
-            property_instance = form.save(commit=False)
-            property_instance.user = request.user  # Assigning property to current user log
-            property_instance.save()
-            
-            # Formset parameters mapped to primary key entity context 
-            formset.instance = property_instance
+            # Property ko user ke sath link karke save karna
+            property_obj = form.save(commit=False)
+            property_obj.user = request.user
+            property_obj.save()
+
+            # Multiple gallery images save karna
+            formset.instance = property_obj
             formset.save()
-            
-            messages.success(request, 'Your property and gallery images have been listed successfully!')
+
+            messages.success(request, 'Aapki property successfully list ho gayi hai!')
             return redirect('dashboard')
     else:
         form = PropertyForm()
         formset = PropertyImageFormSet()
-        
+
     return render(request, 'properties/add_property.html', {
         'form': form,
-        'formset': formset
+        'formset': formset,
     })
 
 

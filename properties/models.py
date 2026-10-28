@@ -1,13 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Property(models.Model):
     PROPERTY_TYPES = [
         ('SALE', 'For Sale'),
         ('RENT', 'For Rent'),
     ]
 
-    # 📍 Ranchi ke Major Hotspots Choices Array
     RANCHI_HOTSPOTS = [
         ('Lalpur', 'Lalpur'),
         ('Kanke Road', 'Kanke Road'),
@@ -19,15 +19,10 @@ class Property(models.Model):
         ('Ratu Road', 'Ratu Road'),
     ]
 
-    # ✨ DASHBOARD LINK: Yeh batayega ki property kisne list ki hai (Broker/User)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties', null=True, blank=True)
-    
     title = models.CharField(max_length=200)
     description = models.TextField()
-    
-    # 🔄 Location field ko CharField se choices me link kar diya
     location = models.CharField(max_length=100, choices=RANCHI_HOTSPOTS, default='Lalpur')
-    
     price = models.IntegerField()
     bedrooms = models.IntegerField()
     bathrooms = models.IntegerField()
@@ -44,11 +39,8 @@ class Property(models.Model):
 
 
 class Inquiry(models.Model):
-    # Optional connection for logged in users, drops to NULL if user deletes profile
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    # Linked property for incoming lead notifications
     property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='inquiries')
-    
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=15)
@@ -68,7 +60,6 @@ class Wishlist(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        # Ek user ek property ko ek hi baar wishlist me daal sakta hai (Anti-Duplication)
         unique_together = ('user', 'property')
         verbose_name_plural = "Wishlists"
 
@@ -87,4 +78,3 @@ class PropertyImage(models.Model):
 
     def __str__(self):
         return f"Image for {self.property.title}"
-      

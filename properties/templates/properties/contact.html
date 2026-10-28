@@ -1,11 +1,36 @@
 {% extends 'properties/base.html' %}
+{% load static %}
+
 {% block title %}Contact Us | DigiEstate{% endblock %}
 
 {% block content %}
+<!-- Header Banner -->
+<section class="py-4 text-white" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="fw-bold fs-2 mb-1"><i class="bi bi-envelope-paper-fill text-success me-2"></i>Contact Us</h1>
+                <p class="text-white-50 mb-0 small">Have questions about property listings, registration, or partnerships? Reach out to our team.</p>
+            </div>
+            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-md-end mb-0 small">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-success text-decoration-none">Home</a></li>
+                        <li class="breadcrumb-item active text-white-50" aria-current="page">Contact</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Contact Section -->
 <div class="container my-5">
+    
+    <!-- Flash Messages -->
     {% if messages %}
         {% for message in messages %}
-            <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm rounded-3 d-flex align-items-center justify-content-between p-3 mb-4" role="alert" style="background-color: #d1fae5; color: #065f46;">
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show border-0 shadow-sm rounded-3 d-flex align-items-center justify-content-between p-3 mb-4" role="alert">
                 <div class="d-flex align-items-center">
                     <i class="bi bi-check-circle-fill me-2 fs-5 text-success"></i>
                     <span class="fw-medium">{{ message }}</span>
@@ -15,73 +40,121 @@
         {% endfor %}
     {% endif %}
 
-    <div class="row g-5 justify-content-center">
+    <div class="row g-4 justify-content-center">
+        
+        <!-- Left Column: Contact Cards & Info -->
         <div class="col-lg-5">
-            <div class="bg-dark text-white p-4 p-md-5 rounded-4 h-100 d-flex flex-column justify-content-between shadow">
+            <div class="bg-dark text-white p-4 p-md-5 rounded-4 h-100 d-flex flex-column justify-content-between shadow-lg" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;">
                 <div>
-                    <h3 class="fw-bold text-white mb-2">Connect With DigiEstate</h3>
-                    <p class="text-white-50 small mb-4">Have questions about listings or dashboard metrics? Drop us an inquiry frame.</p>
+                    <span class="badge bg-success bg-opacity-25 text-success border border-success border-opacity-25 fw-semibold px-3 py-2 rounded-pill mb-3 text-uppercase fs-7 shadow-sm">
+                        <i class="bi bi-headset me-1"></i> Customer Support
+                    </span>
                     
+                    <h3 class="fw-bold text-white mb-2">Connect With DigiEstate</h3>
+                    <p class="text-white-50 small mb-4">Have queries regarding buy/sell listings, owner verification, or technical support? Drop us a message.</p>
+                    
+                    <!-- Address -->
                     <div class="d-flex align-items-start mb-4">
-                        <div class="fs-4 text-success me-3"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div class="bg-success bg-opacity-10 text-success p-3 rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                            <i class="bi bi-geo-alt-fill fs-5"></i>
+                        </div>
                         <div>
-                            <h6 class="mb-1 fw-bold">Our Headquarters</h6>
+                            <h6 class="mb-1 fw-bold text-white">Our Headquarters</h6>
                             <p class="small text-white-50 mb-0">Lalpur Main Rd, Ranchi, Jharkhand, 834001</p>
                         </div>
                     </div>
                     
+                    <!-- Email -->
                     <div class="d-flex align-items-start mb-4">
-                        <div class="fs-4 text-success me-3"><i class="bi bi-envelope-open-fill"></i></div>
+                        <div class="bg-success bg-opacity-10 text-success p-3 rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                            <i class="bi bi-envelope-open-fill fs-5"></i>
+                        </div>
                         <div>
-                            <h6 class="mb-1 fw-bold">Support Electronic Mail</h6>
+                            <h6 class="mb-1 fw-bold text-white">Support Email</h6>
                             <p class="small text-white-50 mb-0">support@digiestate.com</p>
                         </div>
                     </div>
 
-                    <div class="d-flex align-items-start">
-                        <div class="fs-4 text-success me-3"><i class="bi bi-telephone-fill"></i></div>
+                    <!-- Phone -->
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="bg-success bg-opacity-10 text-success p-3 rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                            <i class="bi bi-telephone-fill fs-5"></i>
+                        </div>
                         <div>
-                            <h6 class="mb-1 fw-bold">Corporate Hotline</h6>
+                            <h6 class="mb-1 fw-bold text-white">Corporate Hotline</h6>
                             <p class="small text-white-50 mb-0">+91 651 234 5678</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="border-top border-secondary pt-4 mt-4">
-                    <p class="small text-white-50 mb-0">Developed with precision under Django and Bootstrap 5 Layouts.</p>
+                <div class="border-top border-secondary border-opacity-50 pt-4 mt-3">
+                    <p class="small text-white-50 mb-0"><i class="bi bi-shield-check text-success me-1"></i> RERA Compliant Real Estate Directory</p>
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-6">
-            <div class="card border-0 shadow-sm p-4 p-md-5 rounded-4 bg-white">
-                <h3 class="fw-bold text-dark mb-4">Send An Operational Message</h3>
+        <!-- Right Column: Interactive Contact Form -->
+        <div class="col-lg-7">
+            <div class="card border-0 shadow-lg p-4 p-md-5 rounded-4 bg-white">
+                <h3 class="fw-bold text-dark mb-1">Send Us a Message</h3>
+                <p class="text-muted small mb-4">Fill out the form below and our team will get back to you within 24 hours.</p>
                 
                 <form method="POST">
                     {% csrf_token %}
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold text-secondary">Your Name</label>
-                        <input type="text" name="name" class="form-control bg-light border-0 py-2.5 shadow-none" placeholder="Enter your full name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold text-secondary">Email Address</label>
-                        <input type="email" name="email" class="form-control bg-light border-0 py-2.5 shadow-none" placeholder="name@example.com" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold text-secondary">Subject</label>
-                        <input type="text" name="subject" class="form-control bg-light border-0 py-2.5 shadow-none" placeholder="e.g., Query about Broker Portal" required>
-                    </div>
-                    <div class="mb-4">
-                        <label class="form-label small fw-bold text-secondary">Detailed Message</label>
-                        <textarea name="message" class="form-control bg-light border-0 shadow-none" rows="4" placeholder="Type your concerns here..." required></textarea>
+                    
+                    <div class="row g-3">
+                        <!-- Full Name -->
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-secondary text-uppercase">Your Name <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-person"></i></span>
+                                <input type="text" name="name" class="form-control bg-light border-start-0 py-2.5" placeholder="John Doe" required>
+                            </div>
+                        </div>
+
+                        <!-- Email Address -->
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-secondary text-uppercase">Email Address <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-envelope"></i></span>
+                                <input type="email" name="email" class="form-control bg-light border-start-0 py-2.5" placeholder="name@example.com" required>
+                            </div>
+                        </div>
+
+                        <!-- Subject -->
+                        <div class="col-12">
+                            <label class="form-label small fw-bold text-secondary text-uppercase">Subject <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-tag"></i></span>
+                                <input type="text" name="subject" class="form-control bg-light border-start-0 py-2.5" placeholder="e.g., Inquiry regarding Property Listing" required>
+                            </div>
+                        </div>
+
+                        <!-- Detailed Message -->
+                        <div class="col-12">
+                            <label class="form-label small fw-bold text-secondary text-uppercase">Detailed Message <span class="text-danger">*</span></label>
+                            <textarea name="message" class="form-control bg-light p-3" rows="4" placeholder="Type your concerns or message here..." required></textarea>
+                        </div>
                     </div>
                     
-                    <button type="submit" class="btn btn-success w-100 fw-bold py-2.5 shadow-sm rounded-3">
-                        <i class="bi bi-send-fill me-2"></i>Dispatch Global Inquiry
+                    <button type="submit" class="btn btn-success w-100 fw-bold py-3 mt-4 shadow-sm rounded-3">
+                        <i class="bi bi-send-fill me-2"></i>Send Message
                     </button>
                 </form>
             </div>
         </div>
+
     </div>
+
+    <!-- Google Map Embed Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3662.620610996162!2d85.3323043!3d23.3658518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4e13d9a1f2f01%3A0x6a1f8b89e2c6e60!2sLalpur%2C%20Ranchi%2C%20Jharkhand%20834001!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                        width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+
 </div>
 {% endblock %}
